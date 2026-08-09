@@ -8,6 +8,6 @@
   "latest_state_path": "data/latest_comparison.json",
   "currency": "SAR",
   "timezone": "Asia/Riyadh",
-  "pages_url_hint": "",
+  "pages_url_hint": "https://departcomsa-dot.github.io/depart-mokab-price-tracker/",
   "alert_only_on_changes": false
 }
