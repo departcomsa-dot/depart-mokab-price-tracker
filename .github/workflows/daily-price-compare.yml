@@ -62,5 +62,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -f issue_body.md ]; then
-            gh issue create --title "تقرير أسعار مكعب وديبارت - $(date -u +%Y-%m-%d)" --body-file issue_body.md --label price-alert || true
+            gh label create price-alert --color F97316 --description "Daily price comparison alert" || true
+            gh issue create --title "تقرير أسعار مكعب وديبارت - $(date -u +%Y-%m-%d)" --body-file issue_body.md --label price-alert
           fi
