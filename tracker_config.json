@@ -1,0 +1,13 @@
+{
+  "project_name": "مقارنة أسعار مكعب وديبارت",
+  "mokab_sitemap_url": "https://mokab.com/sitemap.xml",
+  "mokab_snapshot_path": "data/mokab_snapshot.json",
+  "depart_products_path": "data/depart_products.json",
+  "docs_dir": "docs",
+  "history_dir": "data/history",
+  "latest_state_path": "data/latest_comparison.json",
+  "currency": "SAR",
+  "timezone": "Asia/Riyadh",
+  "pages_url_hint": "",
+  "alert_only_on_changes": false
+}
