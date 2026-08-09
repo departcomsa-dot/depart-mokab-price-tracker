@@ -44,6 +44,6 @@ python scripts/price_compare.py --mode snapshot
 - `SMTP_USER`
 - `SMTP_PASS`
 - `EMAIL_FROM`
-- `EMAIL_TO`
+- المستلم مضبوط داخل workflow على: `ahmed.shokri@drive7.com`
 
-بدون هذه الأسرار سيكتفي النظام بإنشاء GitHub Issue يومي.
+بدون أسرار SMTP سيكتفي النظام بإنشاء GitHub Issue يومي، ولن يرسل إيميل مباشر.
