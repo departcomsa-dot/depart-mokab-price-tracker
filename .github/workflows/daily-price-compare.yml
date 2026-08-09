@@ -1,0 +1,66 @@
+name: Mokab vs Depart Price Compare
+
+on:
+  schedule:
+    # 06:20 صباحًا بتوقيت السعودية تقريبًا
+    - cron: "20 3 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "live أو snapshot"
+        required: false
+        default: "live"
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run comparison
+        env:
+          TRACKER_MODE: ${{ github.event.inputs.mode || 'live' }}
+          MOKAB_WORKERS: "1"
+          MOKAB_REQUEST_DELAY: "1.0"
+          HTTP_RETRIES: "4"
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python scripts/price_compare.py --send-email
+
+      - name: Commit generated report
+        run: |
+          git config user.name "depart-price-bot"
+          git config user.email "actions@github.com"
+          git add docs data/latest_comparison.json data/history issue_body.md email_body.html
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Daily Mokab vs Depart price compare - $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Create GitHub issue summary
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f issue_body.md ]; then
+            gh issue create --title "تقرير أسعار مكعب وديبارت - $(date -u +%Y-%m-%d)" --body-file issue_body.md --label price-alert || true
+          fi
