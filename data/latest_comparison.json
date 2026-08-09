@@ -1,15 +1,15 @@
 {
   "project": "مقارنة أسعار مكعب وديبارت",
-  "generated_at": "2026-08-09T12:52:03+03:00",
+  "generated_at": "2026-08-09T12:57:05+03:00",
   "mode": "snapshot",
   "source_meta": {
     "mokab": {
       "mode": "snapshot",
-      "snapshot_path": "F:\\ملفات شغل\\drive7\\phase1_20_products_images_final\\mokab-vs-depart-price-tracker\\data\\mokab_snapshot.json",
+      "snapshot_path": "/home/runner/work/depart-mokab-price-tracker/depart-mokab-price-tracker/data/mokab_snapshot.json",
       "scanned_products": 356,
       "failed_count": 0
     },
-    "depart_path": "F:\\ملفات شغل\\drive7\\phase1_20_products_images_final\\mokab-vs-depart-price-tracker\\data\\depart_products.json"
+    "depart_path": "/home/runner/work/depart-mokab-price-tracker/depart-mokab-price-tracker/data/depart_products.json"
   },
   "summary": {
     "mokab_products": 356,
